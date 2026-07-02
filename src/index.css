@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-script: "Great Vibes", cursive;
+
+  --color-primary-olive: #566B2F;
+  --color-secondary-olive: #798C4B;
+  --color-gold-accent: #C8A45D;
+  --color-gold-light: #E5C483;
+  --color-cream-bg: #FAFAF8;
+  --color-dark-charcoal: #2E2E2E;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-cream-bg);
+    color: var(--color-dark-charcoal);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Premium Utilities */
+
+.marble-bg {
+  background-color: #fcfcf9;
+  background-image: 
+    linear-gradient(135deg, rgba(244, 244, 240, 0.4) 0%, rgba(249, 249, 245, 0.4) 100%),
+    radial-gradient(circle at 20% 30%, rgba(200, 164, 93, 0.03) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(86, 107, 47, 0.03) 0%, transparent 50%),
+    linear-gradient(45deg, transparent 45%, rgba(200, 164, 93, 0.02) 48%, rgba(200, 164, 93, 0.05) 50%, rgba(200, 164, 93, 0.02) 52%, transparent 55%),
+    linear-gradient(-45deg, transparent 40%, rgba(229, 196, 131, 0.02) 44%, rgba(229, 196, 131, 0.04) 45%, rgba(229, 196, 131, 0.01) 48%, transparent 52%);
+  background-size: cover;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #A88942 0%, #C8A45D 50%, #E5C483 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gold-border {
+  border-image: linear-gradient(to right, #A88942, #C8A45D, #E5C483, #C8A45D, #A88942) 1;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(86, 107, 47, 0.08);
+  border-radius: 24px;
+}
+
+.glass-card-dark {
+  background: rgba(86, 107, 47, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(86, 107, 47, 0.15);
+  border-radius: 24px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFAF8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #798C4B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #566B2F;
+}
+
+/* Floral Falling Animation Classes */
+@keyframes petalFall {
+  0% {
+    transform: translateY(-5%) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(105%) rotate(360deg) translateX(50px);
+    opacity: 0;
+  }
+}
+
+.animate-petal {
+  animation: petalFall 12s linear infinite;
+}
+
+/* Custom transition utilities */
+.transition-all-500 {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
