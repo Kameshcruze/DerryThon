@@ -12,10 +12,10 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }: MusicPlayerProp
 
   useEffect(() => {
     // Create audio instance
-    // A soft, beautiful instrumental acoustic/piano classical background music track
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3');
+    // A soft, breathtaking Tamil wedding flute cover of "Kannalane" (AR Rahman classic)
+    const audio = new Audio('https://archive.org/download/kannalane-flute-instrumental/Kannalane%20-%20Flute%20-%20Instrumental.mp3');
     audio.loop = true;
-    audio.volume = 0.4;
+    audio.volume = 0.55;
     audioRef.current = audio;
 
     audio.addEventListener('canplaythrough', () => {
@@ -79,7 +79,7 @@ export default function MusicPlayer({ isPlaying, setIsPlaying }: MusicPlayerProp
       {isPlaying && (
         <div className="absolute right-14 bottom-2 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono tracking-wider text-primary-olive border border-gold-accent/20 flex items-center gap-1.5 shadow-sm">
           <Music className="w-3 h-3 text-gold-accent animate-bounce" />
-          <span>MELODY ON</span>
+          <span>TAMIL ROMANCE ON</span>
         </div>
       )}
     </div>

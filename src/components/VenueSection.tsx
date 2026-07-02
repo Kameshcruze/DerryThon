@@ -40,8 +40,7 @@ export default function VenueSection() {
             </p>
 
             <div className="space-y-4 border-t border-gold-accent/10 pt-5 mb-8">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-gold-accent shrink-0 mt-0.5" />
+              <div className="flex items-start">
                 <div>
                   <h5 className="text-xs uppercase font-semibold text-primary-olive tracking-wider mb-0.5">ADDRESS</h5>
                   <p className="text-sm text-dark-charcoal/80">
@@ -50,8 +49,7 @@ export default function VenueSection() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <Compass className="w-5 h-5 text-gold-accent shrink-0 mt-0.5" />
+              <div className="flex items-start">
                 <div>
                   <h5 className="text-xs uppercase font-semibold text-primary-olive tracking-wider mb-0.5">LANDMARK</h5>
                   <p className="text-sm text-dark-charcoal/80">

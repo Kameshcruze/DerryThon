@@ -19,6 +19,7 @@ import RSVPForm from './components/RSVPForm';
 import GuestWishes from './components/GuestWishes';
 import GiftRegistry from './components/GiftRegistry';
 import ContactSection from './components/ContactSection';
+import TamilDivider from './components/TamilDivider';
 
 export default function App() {
   const [onEnterClicked, setOnEnterClicked] = useState(false);
@@ -83,7 +84,7 @@ export default function App() {
                   <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive mb-4">
                     Counting Down to Forever
                   </h2>
-                  <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                  <TamilDivider className="max-w-xs mx-auto -my-1" />
                   <p className="text-sm font-sans text-dark-charcoal/80 max-w-lg mx-auto leading-relaxed">
                     Join us as we stand beneath the canopy, pledge our eternal devotion, and step into our beautiful tomorrow.
                   </p>
@@ -106,7 +107,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   Derry & Thon
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <BrideGroom />
@@ -121,7 +122,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive mb-2">
                   Our Love Story
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
                 <p className="text-xs sm:text-sm font-sans text-dark-charcoal/75 max-w-md mx-auto italic">
                   "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
                 </p>
@@ -142,7 +143,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   The Wedding Events
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <EventCards />
@@ -157,7 +158,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   The Sanctuary
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <VenueSection />
@@ -175,7 +176,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   The Memory Gallery
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <Gallery />
@@ -190,7 +191,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   The Celebration Timeline
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <WeddingDayTimeline />
@@ -213,7 +214,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   Wishes from Beloved Guests
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <GuestWishes />
@@ -236,7 +237,7 @@ export default function App() {
                 <h2 className="font-display text-4xl sm:text-5xl font-medium text-primary-olive">
                   Helplines & Contacts
                 </h2>
-                <div className="w-16 h-[1px] bg-gold-accent mx-auto my-3" />
+                <TamilDivider className="max-w-xs mx-auto -my-1" />
               </div>
 
               <ContactSection />
@@ -267,6 +268,9 @@ export default function App() {
 
                 <p className="text-[10px] font-mono text-cream-bg/50 tracking-wider">
                   &copy; {new Date().getFullYear()} Derry & Thon Wedding Invitation. Built with love and blessings.
+                </p>
+                <p className="text-xs font-sans tracking-wide text-gold-accent/80 mt-3">
+                  Designed by <a href="https://elitewebdevelopers.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-gold-light underline transition-colors font-medium">Elite</a>
                 </p>
               </div>
             </footer>

@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, Calendar, Clock, MapPin, Gift } from 'lucide-react';
 
 interface EventCardProps {
   title: string;
@@ -9,11 +8,10 @@ interface EventCardProps {
   venue: string;
   host: string;
   description: string;
-  icon: ReactNode;
   delay: number;
 }
 
-function EventCard({ title, date, time, venue, host, description, icon, delay }: EventCardProps) {
+function EventCard({ title, date, time, venue, host, description, delay }: EventCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -34,31 +32,26 @@ function EventCard({ title, date, time, venue, host, description, icon, delay }:
       </div>
 
       <div>
-        {/* Event Icon Banner */}
-        <div className="w-14 h-14 rounded-full bg-primary-olive/10 flex items-center justify-center text-primary-olive mb-6 group-hover:bg-primary-olive group-hover:text-cream-bg transition-colors duration-500">
-          {icon}
-        </div>
-
         {/* Header */}
-        <h4 className="text-2xl font-display font-medium text-primary-olive mb-3 group-hover:text-gold-accent transition-colors duration-300">
+        <h4 className="text-2xl font-display font-medium text-primary-olive mb-3 pt-2 group-hover:text-gold-accent transition-colors duration-300">
           {title}
         </h4>
 
         {/* Separator */}
         <div className="w-12 h-[1px] bg-gold-accent mb-5 group-hover:w-20 transition-all duration-500" />
 
-        {/* Info Rows */}
-        <div className="space-y-3.5 mb-6 text-sm text-dark-charcoal/90">
-          <div className="flex items-center gap-3">
-            <Calendar className="w-4 h-4 text-gold-accent shrink-0" />
+        {/* Info Rows (Sleek minimalist text metadata instead of icons) */}
+        <div className="space-y-3 mb-6 text-sm text-dark-charcoal/90">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[10px] font-mono tracking-widest text-gold-accent/80 uppercase font-semibold">Date</span>
             <span className="font-sans font-medium">{date}</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Clock className="w-4 h-4 text-gold-accent shrink-0" />
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[10px] font-mono tracking-widest text-gold-accent/80 uppercase font-semibold">Time</span>
             <span className="font-sans">{time}</span>
           </div>
-          <div className="flex items-start gap-3">
-            <MapPin className="w-4 h-4 text-gold-accent shrink-0 mt-0.5" />
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[10px] font-mono tracking-widest text-gold-accent/80 uppercase font-semibold">Venue</span>
             <span className="font-sans leading-tight">{venue}</span>
           </div>
         </div>
@@ -84,7 +77,6 @@ export default function EventCards() {
       venue: 'Main Hall, Vivekanandapuram, Kanyakumari, Tamil Nadu',
       host: 'Smith Family',
       description: 'The union of Derry and Thon. A sacred, beautiful event witnessing traditional vows and floral blessings under the morning sun.',
-      icon: <Sparkles className="w-6 h-6" />,
     },
     {
       title: 'Traditional Rituals',
@@ -93,7 +85,6 @@ export default function EventCards() {
       venue: 'Saraswati Mandapam, Vivekanandapuram, Kanyakumari',
       host: 'Smith Family',
       description: 'Honoring heritage with traditional prayers, holy fire rituals, and ancient songs surrounded by vibrant drapes and local blooms.',
-      icon: <Gift className="w-6 h-6" />,
     },
     {
       title: 'The Grand Reception',
@@ -102,7 +93,6 @@ export default function EventCards() {
       venue: 'Seaside Lawn, Vivekanandapuram, Kanyakumari',
       host: 'Smith Family',
       description: 'Celebrate our first steps together with dining, string music, and speeches under a canopy of sparkling lights next to the ocean waves.',
-      icon: <Calendar className="w-6 h-6" />,
     },
   ];
 
@@ -117,7 +107,6 @@ export default function EventCards() {
             venue={event.venue}
             host={event.host}
             description={event.description}
-            icon={event.icon}
             delay={index * 0.15}
           />
         </div>

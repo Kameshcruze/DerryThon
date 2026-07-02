@@ -1,5 +1,7 @@
-import { motion } from 'motion/react';
-import { Heart, Calendar, MapPin, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, useMotionValue, useSpring } from 'motion/react';
+import { Heart, ChevronDown, Sparkles } from 'lucide-react';
+import TamilDivider from './TamilDivider';
 
 interface HeroProps {
   onRsvpClick: () => void;
@@ -7,158 +9,202 @@ interface HeroProps {
 }
 
 export default function Hero({ onRsvpClick, onExploreClick }: HeroProps) {
+  // Parallax on mouse movement setup
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth springs for natural lag/parallax feel
+  const springX = useSpring(mouseX, { stiffness: 40, damping: 15 });
+  const springY = useSpring(mouseY, { stiffness: 40, damping: 15 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const xOffset = (clientX - window.innerWidth / 2) / 35;
+      const yOffset = (clientY - window.innerHeight / 2) / 35;
+      mouseX.set(xOffset);
+      mouseY.set(yOffset);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Split names for elegant reveal
+  const brideName = "Derry".split("");
+  const groomName = "Thon".split("");
+
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden marble-bg py-16 px-4" id="home">
-      
-      {/* Decorative Golden Outer Frame */}
-      <div className="absolute inset-4 sm:inset-8 border border-gold-accent/20 pointer-events-none rounded-[28px] z-20">
-        <div className="absolute inset-1 border border-gold-accent/5 rounded-[24px]" />
-      </div>
-
-      {/* Decorative Eucalyptus Botanical Corner SVGs - Pristine Hand-drawn Leaf SVGs */}
-      {/* Top Left Leaves */}
-      <div className="absolute top-6 left-6 sm:top-12 sm:left-12 w-24 h-24 sm:w-48 sm:h-48 text-primary-olive/20 pointer-events-none z-10 select-none">
-        <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full transform -rotate-45">
-          <path d="M10 90 Q 50 50 90 10 M 90 10 Q 75 35 50 40 M 50 40 Q 35 65 10 90 M 90 10 Q 60 20 45 45 M 45 45 Q 15 55 10 90" />
-          <path d="M30 70 Q 15 45 35 35 Q 55 25 50 60 Z" opacity="0.6" />
-          <path d="M60 40 Q 45 15 65 5 Q 85 -5 80 30 Z" opacity="0.4" fill="#798C4B" />
-          <circle cx="50" cy="50" r="2" fill="#C8A45D" />
-        </svg>
-      </div>
-
-      {/* Bottom Right Leaves */}
-      <div className="absolute bottom-6 right-6 sm:bottom-12 sm:right-12 w-24 h-24 sm:w-48 sm:h-48 text-primary-olive/20 pointer-events-none z-10 select-none">
-        <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full transform rotate-135">
-          <path d="M10 90 Q 50 50 90 10 M 90 10 Q 75 35 50 40 M 50 40 Q 35 65 10 90 M 90 10 Q 60 20 45 45 M 45 45 Q 15 55 10 90" />
-          <path d="M30 70 Q 15 45 35 35 Q 55 25 50 60 Z" opacity="0.6" />
-          <path d="M60 40 Q 45 15 65 5 Q 85 -5 80 30 Z" opacity="0.4" fill="#798C4B" />
-        </svg>
-      </div>
-
-      {/* Golden Central Dividers & Content Card */}
-      <div className="relative z-30 max-w-3xl text-center flex flex-col items-center">
-        
-        {/* Hosted By Label */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-4 sm:mb-6"
-        >
-          <span className="text-[11px] sm:text-xs font-mono tracking-[0.25em] uppercase text-gold-accent font-semibold block">
-            SMITH FAMILY PRESENTS
-          </span>
-          <div className="w-8 h-[1px] bg-gold-accent mx-auto mt-2" />
-        </motion.div>
-
-        {/* Traditional Invitation Opening Text */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-xs sm:text-sm font-sans text-dark-charcoal/80 uppercase tracking-widest max-w-md mx-auto mb-4 px-4 font-medium"
-        >
-          Together with our Families, We Cordially Invite You to Celebrate the Wedding Ceremony of
-        </motion.p>
-
-        {/* Elegant Golden Floral Divider */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.4 }}
-          className="w-24 sm:w-36 h-[1px] bg-gradient-to-r from-transparent via-gold-accent to-transparent my-2"
-        />
-
-        {/* Beautiful Couple Names Heading */}
-        <div className="my-6 sm:my-10 px-4">
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.6 }}
-            className="font-script text-6xl sm:text-8xl md:text-9xl text-primary-olive tracking-wide leading-none"
-          >
-            Derry
-          </motion.h1>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="my-3 flex items-center justify-center gap-4 text-gold-accent"
-          >
-            <div className="w-8 sm:w-16 h-[1px] bg-gold-accent/40" />
-            <Heart className="w-6 h-6 sm:w-8 sm:h-8 fill-current text-gold-accent animate-pulse" />
-            <div className="w-8 sm:w-16 h-[1px] bg-gold-accent/40" />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, delay: 0.7 }}
-            className="font-script text-6xl sm:text-8xl md:text-9xl text-primary-olive tracking-wide leading-none"
-          >
-            Thon
-          </motion.h1>
+    <div 
+      className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden marble-bg py-4 px-6 invitation-vignette" 
+      id="home"
+    >
+      {/* 1. Subtle Parallax Decorative Background Branch Details */}
+      <motion.div 
+        style={{ x: springX, y: springY }} 
+        className="absolute inset-0 pointer-events-none z-0 opacity-40 flex justify-between items-center px-12 sm:px-24"
+      >
+        <div className="w-16 h-16 sm:w-28 sm:h-28 text-primary-olive/20 rotate-12">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <path d="M10,90 Q50,45 90,10" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle cx="50" cy="50" r="4" fill="#C8A45D" />
+          </svg>
         </div>
+        <div className="w-16 h-16 sm:w-28 sm:h-28 text-primary-olive/20 -rotate-12">
+          <svg viewBox="0 0 100 100" fill="currentColor">
+            <path d="M90,90 Q50,45 10,10" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle cx="50" cy="50" r="4" fill="#C8A45D" />
+          </svg>
+        </div>
+      </motion.div>
 
-        {/* Elegant Golden Floral Divider Bottom */}
-        <motion.div
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.9 }}
-          className="w-24 sm:w-36 h-[1px] bg-gradient-to-r from-transparent via-gold-accent to-transparent my-2"
-        />
-
-        {/* Wedding Date Info Row */}
-        <motion.div
+      {/* 2. THE CENTERED INVITATION CARD (BALANCED & SYMMETRICAL) */}
+      <div className="relative z-30 max-w-4xl w-full text-center flex flex-col items-center justify-center h-full">
+        
+        {/* Together With Our Families */}
+        <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="mt-4 sm:mt-6 mb-8 text-center"
+          transition={{ duration: 1.2, delay: 0.1 }}
+          className="text-xs sm:text-sm tracking-[0.3em] text-gold-accent font-display uppercase font-semibold mb-2 sm:mb-3"
         >
-          <span className="text-lg sm:text-2xl font-display font-medium text-primary-olive tracking-wide block">
-            19th & 20th February 2027
-          </span>
-          <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-gold-accent font-semibold block mt-1.5">
-            11:00 AM ONWARDS | KANYAKUMARI, TAMIL NADU
-          </span>
+          Together With Our Families
+        </motion.p>
+
+        {/* We Cordially Invite You To Celebrate */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.25 }}
+          className="text-[10px] sm:text-xs tracking-[0.25em] text-dark-charcoal/70 font-sans uppercase font-medium mb-1"
+        >
+          We Cordially Invite You To Celebrate
+        </motion.p>
+
+        {/* The Wedding Ceremony Of */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="text-xs sm:text-sm tracking-[0.2em] text-dark-charcoal/70 font-display italic mb-6 sm:mb-8"
+        >
+          The Wedding Ceremony Of
+        </motion.p>
+
+        {/* Traditional Tamil Nadu Symmetrical Kolam/Vilakku Divider */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, delay: 0.6 }}
+          className="w-full max-w-lg mb-4"
+        >
+          <TamilDivider />
         </motion.div>
 
-        {/* Dual CTA Buttons */}
+        {/* MAJESTIC NAMES: Derry & Thon (Gargantuan luxury cursive display) */}
+        <div className="my-2 sm:my-4 flex flex-col items-center justify-center">
+          {/* Derry */}
+          <h1 className="font-allura text-8xl sm:text-[10.5rem] md:text-[11.5rem] text-primary-olive tracking-wide leading-[0.8] select-none flex justify-center items-center">
+            {brideName.map((char, index) => (
+              <motion.span
+                key={`bride-${index}`}
+                initial={{ opacity: 0, rotate: -15, y: 30 }}
+                animate={{ opacity: 1, rotate: 0, y: 0 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 0.6 + index * 0.1, 
+                  type: 'spring', 
+                  stiffness: 80 
+                }}
+                className="inline-block origin-bottom"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h1>
+
+          {/* Golden Heart Divider */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1, delay: 1.3, type: 'spring', stiffness: 120 }}
+            className="my-5 sm:my-8 flex items-center justify-center gap-4 text-gold-accent"
+          >
+            <div className="w-8 sm:w-16 h-[1.5px] bg-gradient-to-l from-gold-accent to-transparent" />
+            <div className="p-2 sm:p-2.5 rounded-full border border-gold-accent/30 bg-white/50 backdrop-blur-sm shadow-sm">
+              <Heart className="w-5 h-5 sm:w-7 sm:h-7 fill-current text-gold-accent animate-heartbeat-slow" />
+            </div>
+            <div className="w-8 sm:w-16 h-[1.5px] bg-gradient-to-r from-gold-accent to-transparent" />
+          </motion.div>
+
+          {/* Thon */}
+          <h1 className="font-allura text-8xl sm:text-[10.5rem] md:text-[11.5rem] text-primary-olive tracking-wide leading-[0.8] select-none flex justify-center items-center">
+            {groomName.map((char, index) => (
+              <motion.span
+                key={`groom-${index}`}
+                initial={{ opacity: 0, rotate: 15, y: 30 }}
+                animate={{ opacity: 1, rotate: 0, y: 0 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 1.0 + index * 0.1, 
+                  type: 'spring', 
+                  stiffness: 80 
+                }}
+                className="inline-block origin-bottom"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </h1>
+        </div>
+
+        {/* Symmetrical Traditional Tamil Nadu Divider */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, delay: 1.5 }}
+          className="w-full max-w-lg mt-4 mb-4"
+        >
+          <TamilDivider />
+        </motion.div>
+
+        {/* 19th & 20th February 2027 */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.8 }}
+          className="text-lg sm:text-2xl font-display font-medium text-primary-olive tracking-wider"
+        >
+          19th & 20th February 2027
+        </motion.p>
+
+        {/* 11:00 AM Onwards */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.95 }}
+          className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.25em] text-gold-accent font-semibold mt-1"
+        >
+          11:00 AM Onwards
+        </motion.p>
+
+        {/* View Invitation Luxury Centered Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.3 }}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full max-w-sm px-6"
+          transition={{ duration: 1, delay: 2.15 }}
+          className="mt-8 sm:mt-10"
         >
           <button
             onClick={onExploreClick}
-            className="flex-1 py-4 sm:py-4.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-primary-olive hover:bg-secondary-olive text-cream-bg transition-all duration-300 shadow-md hover:shadow-lg border border-primary-olive cursor-pointer"
+            className="px-10 py-4.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-primary-olive hover:bg-secondary-olive text-cream-bg shadow-lg hover:shadow-xl transition-all duration-300 border border-gold-accent/40 cursor-pointer flex items-center gap-2 group relative overflow-hidden"
             id="hero-view-invitation"
           >
-            View Details
+            {/* Soft gold glint hover reflection */}
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer" />
+            <span>View Invitation</span>
+            <ChevronDown className="w-4 h-4 animate-bounce group-hover:translate-y-0.5 transition-transform" />
           </button>
-          <button
-            onClick={onRsvpClick}
-            className="flex-1 py-4 sm:py-4.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-white hover:bg-cream-bg text-primary-olive transition-all duration-300 shadow-sm border border-gold-accent/40 cursor-pointer"
-            id="hero-rsvp"
-          >
-            Send RSVP
-          </button>
-        </motion.div>
-
-        {/* Pulsing Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
-          className="absolute bottom-[-10px] sm:bottom-[-20px] left-1/2 -translate-x-1/2 cursor-pointer text-primary-olive/60 hover:text-primary-olive transition-colors"
-          onClick={onExploreClick}
-        >
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-[9px] font-mono tracking-widest uppercase font-semibold">Scroll Down</span>
-            <ChevronDown className="w-4 h-4 animate-bounce" />
-          </div>
         </motion.div>
 
       </div>
